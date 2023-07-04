@@ -54,7 +54,23 @@ public abstract class Element implements Comparable<Element> {
 	 *  @param row the current row the element is in
 	 *  @param col the current column the element is in
 	 */
-	public abstract void fall(DynamicArray<DynamicArray<Element>> grid, int row, int col);
+	public void fall(DynamicArray<DynamicArray<Element>> grid, int row, int col) {
+		if (row == grid.size() - 1)
+			return;
+
+		DynamicArray<Element> below = grid.get(row+1);
+
+		// Fall if the sand is heavier than the element below
+		if (below.get(col) != null && getWeight() > below.get(col).getWeight()) {
+			// Displacing element below to above the sand
+			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col));
+		}
+		// Checking the element below and to the left/right
+		if (below.get(col+1) != null && getWeight() > below.get(col+1).getWeight()) {
+			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col+1));
+		} else
+			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col-1));
+	}
 	
 	/**
 	 *  <p>The element moves one step, if possible. The
@@ -110,5 +126,19 @@ public abstract class Element implements Comparable<Element> {
 		//This method should be a lot like the pushLeft() method above,
 		//except it tries to push this item up instead of left.
 		return false;
+	}
+
+	/**
+	 * Swaps two element's position on a grid.
+	 * @param grid where the elements are
+	 * @param a first element's coordinate
+	 * @param b second element's coordinate
+	 */
+	public void swapElement(DynamicArray<DynamicArray<Element>> grid, Coordinate a, Coordinate b) {
+		Element elementA = grid.get(a.getX()).get(a.getY());
+		Element elementB = grid.get(b.getX()).get(b.getY());
+
+		grid.get(a.getX()).set(a.getY(), elementB);
+		grid.get(b.getX()).set(b.getY(), elementA);
 	}
 }
