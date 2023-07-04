@@ -264,7 +264,7 @@ public class Display extends JComponent implements MouseListener,
 		switch(tool) {
 			case METAL:
 				return new Metal();
-			case SAND:
+//			case SAND:
 //				return new Sand();
 //			case WATER:
 //				return new Water();

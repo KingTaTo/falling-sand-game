@@ -195,11 +195,6 @@ public class DynamicArray<T> implements Iterable<T> {
 	
 	//JavaDoc note: How do you document a main? See Simulation.java for an example
 	public static void main(String args[]){
-		//These are _sample_ tests. If you're seeing all the "yays" that's
-		//an excellend first step! But it might not mean your code is 100%
-		//working... You may edit this as much as you want, so you can add
-		//own tests here, modify these tests, or whatever you need!
-		
 		DynamicArray<Integer> ida = new DynamicArray<>();
 		if ((ida.size() == 0) && (ida.capacity() == 2)){
 			System.out.println("Yay 1");

@@ -1,5 +1,3 @@
-//TO DO: Add your name (as an author), complete the required methods.
-
 /**
  *  The simulator. This tracks the elements in a grid
  *  and coordinates that with the display.
@@ -43,16 +41,6 @@ public class Simulation {
 	 *  @param withDisplay whether or not the display should be created (for testing purposes)
 	 */
 	public Simulation(boolean withDisplay) {
-		// Initialize the grid (see above) to the default size (see above).
-		// Fill the grid with empty void.
-		
-		// If the simulation should be created with a display, then set display
-		// (see above) to a new display. Use the title "Project 1 Simulation",
-		// the default number of rows and columns (see above), and the display
-		// constructor (see Display.java) to do this.
-		
-		// If the simulation should be created without a display, then initialize
-		// the display to null (or Java will yell at you).
 		grid = new DynamicArray<DynamicArray<Element>>(INIT_ROWS);
 		DynamicArray<Element> columns;
 
@@ -62,18 +50,19 @@ public class Simulation {
 				columns.add(new Empty());
 			grid.add(columns);
 		}
-		display = new Display("Project 1 Simulation", INIT_ROWS, INIT_COLS);
+		display = new Display("Falling-Sand Game", INIT_ROWS, INIT_COLS);
 	}
 
 	/**
 	 *  This is called when the user clicks on a location using the given tool.
 	 *  
 	 *  @param row the row where the action happened
-	 *  @param col the column where the actio happened
+	 *  @param col the column where the action happened
 	 *  @param newElem the element the user has created to put there
 	 */
 	public void locationClicked(int row, int col, Element newElem) {
 		// Put the new element in the grid at the row and column indicated.
+		grid.get(row).set(col, newElem);
 	}
 
 	/**
@@ -87,6 +76,12 @@ public class Simulation {
 		
 		// Remember: Display has a setColor(row, col, color) method,
 		// and elements have a getColor() method.
+
+		// Go through each cell of the grid, finding the color using getColor(),
+		// then update the color using setColor()
+		for (int row = 0; row < grid.size(); row++)
+			for (int column = 0; column < grid.get(row).size(); column++)
+				display.setColor(row, column, grid.get(row).get(column).getColor());
 	}
 	
 	/**
