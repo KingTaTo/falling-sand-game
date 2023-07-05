@@ -1,3 +1,5 @@
+package elements;
+
 public class Coordinate {
 	private int x, y;
 

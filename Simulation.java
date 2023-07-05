@@ -1,3 +1,7 @@
+import elements.DynamicArray;
+import elements.Element;
+import elements.Empty;
+
 /**
  *  The simulator. This tracks the elements in a grid
  *  and coordinates that with the display.
@@ -50,7 +54,7 @@ public class Simulation {
 				columns.add(new Empty());
 			grid.add(columns);
 		}
-		display = new Display("Falling-Sand Game", INIT_ROWS, INIT_COLS);
+		display = new Display("Falling-elements.Sand Game", INIT_ROWS, INIT_COLS);
 	}
 
 	/**

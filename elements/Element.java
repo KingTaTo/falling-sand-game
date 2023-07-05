@@ -1,5 +1,4 @@
-//TO DO: Complete one method and the JavaDocs.
-//Don't forget to add your name to the author list!
+package elements;
 
 import java.awt.Color;
 
@@ -9,11 +8,6 @@ import java.awt.Color;
  *  @author K. Raven Russell, and [Your Name Here]
  */
 public abstract class Element implements Comparable<Element> {
-	//******************************************************
-	//*******  DO NOT EDIT ANYTHING IN THIS SECTION  *******
-	//*******        But do read this section!       *******
-	//******************************************************
-	
 	/**
 	 *  Returns the color of the element.
 	 *  
@@ -55,6 +49,7 @@ public abstract class Element implements Comparable<Element> {
 	 *  @param col the current column the element is in
 	 */
 	public void fall(DynamicArray<DynamicArray<Element>> grid, int row, int col) {
+		// Element can't fall below the floor
 		if (row == grid.size() - 1)
 			return;
 
@@ -62,13 +57,14 @@ public abstract class Element implements Comparable<Element> {
 
 		// Fall if the sand is heavier than the element below
 		if (below.get(col) != null && getWeight() > below.get(col).getWeight()) {
-			// Displacing element below to above the sand
+			// Displacing the element directly below
 			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col));
 		}
 		// Checking the element below and to the left/right
 		if (below.get(col+1) != null && getWeight() > below.get(col+1).getWeight()) {
 			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col+1));
-		} else
+		} else if (col - 1 >= 0  && below.get(col-1) != null
+						&& getWeight() > below.get(col-1).getWeight())
 			swapElement(grid, new Coordinate(row, col), new Coordinate(row+1, col-1));
 	}
 	
@@ -117,7 +113,25 @@ public abstract class Element implements Comparable<Element> {
 		
 		return false;
 	}
-	
+
+	public boolean pushRight(DynamicArray<DynamicArray<Element>> grid, int row, int col) {
+		if(col == grid.size()) return false; //definitely can't push right
+
+		//find out which element is to the left
+		Element left = grid.get(row).get(col+1);
+
+		//If that element is lighter than this element
+		//try to push it, and if successful, move this element
+		//into that vacated space (swap with the element that
+		//is now there).
+		if(this.compareTo(left) >= 0 && left.push(grid, row, col+1)) {
+			grid.get(row).set(col, grid.get(row).get(col+1));
+			grid.get(row).set(col+1, this);
+			return true;
+		}
+
+		return false;
+	}
 	//******************************************************
 	//* END DO-NOT-EDIT SECTION -- ONE METHOD TO COMPLETE: *
 	//******************************************************

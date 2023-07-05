@@ -1,7 +1,6 @@
-// TO DO: add your implementation and JavaDocs.
+package elements;// TO DO: add your implementation and JavaDocs.
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 
 public class DynamicArray<T> implements Iterable<T> {

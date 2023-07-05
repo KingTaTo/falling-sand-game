@@ -1,9 +1,11 @@
-//TO DO: Nothing required here.
+package elements;//TO DO: Nothing required here.
 
 //******************************************************
 //*******  DO NOT EDIT ANYTHING BELOW THIS LINE  *******
 //*******  But do read this code (it will help!) *******
 //******************************************************
+
+import elements.Element;
 
 import java.awt.Color;
 

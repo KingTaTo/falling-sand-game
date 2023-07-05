@@ -7,6 +7,8 @@
 //*******      interested in GUIs!               *******
 //******************************************************
 
+import elements.*;
+
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Color;
@@ -214,7 +216,7 @@ public class Display extends JComponent implements MouseListener,
 		topPanel.add(buttonPanel);
 
 		//setup the buttons
-		String[] buttonNames = {"Empty", "Metal", "Sand", "Water"};
+		String[] buttonNames = {"elements.Empty", "elements.Metal", "elements.Sand", "Water"};
 		buttons = new JButton[buttonNames.length+1];
 		//^ one more for the "debug" button at the end...
 
@@ -266,8 +268,8 @@ public class Display extends JComponent implements MouseListener,
 				return new Metal();
 			case SAND:
 				return new Sand();
-//			case WATER:
-//				return new Water();
+			case WATER:
+				return new Water();
 			default:
 			case EMPTY:
 				return new Empty();
